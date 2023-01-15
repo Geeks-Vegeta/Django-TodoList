@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<div class="big_box_container shadow-lg">
+    <div class="upper_section">
+        <form method="POST" action="add/">
+            <input type="text" name="task" id="task" placeholder="Add Todo"  class="my-3 text-muted">
+        </form>
+    </div>
+    <div class="bottom_section my-3 mx-3">
+        <div class="row">
+            <div class="col-4">
+              <div id="list-example" class="list-group">
+                <a class="list-group-item list-group-item-action" href="#list-item-1">Pending</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-2">Completed</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-3">ONGoing</a>
+              </div>
+            </div>
+            <div class="col-8">
+              <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+                <h4 id="list-item-1">Pending</h4>
+                
+                    {% for task in todos %}
+                        {% if task.state == "PENDING" %}
+                            <div class="list_style">
+                                <a href="ongoing/{{task.id}}/"><i class="bi bi-app"></i></a>
+                                <li class="shadow-lg">{{task.task}}</li>
+                                <a href="delete_todo/{{task.id}}/"><i class="bi bi-bucket"></i></a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <h4 id="list-item-3">ONGoing</h4>
+                    {% for task in todos %}
+                        {% if task.state == "ONGOING" %}
+                            <div class="list_style">
+                                <a href="complete/{{task.id}}/"><i class="bi bi-person-workspace"></i></a>
+                                <li class="shadow-lg">{{task.task}}</li>
+                                <a href="delete_todo/{{task.id}}/"><i class="bi bi-bucket"></i></a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <h4 id="list-item-2">Completed</h4>
+                    {% for task in todos %}
+                    {% if task.is_completed == True %}
+                        <div class="list_style">
+                            <i class="bi bi-patch-check"></i>
+                            <strike>{{task.task}}</strike>
+                            <a href="delete_todo/{{task.id}}/"><i class="bi bi-bucket"></i></a>
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                   
+            
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+<style>
+    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+    .big_box_container{
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50rem;
+    height: 30rem;
+    background-color: transparent;
+    }
+
+    .upper_section{
+        width: 50rem;
+        height: 6rem;
+        background-color: rgb(73, 50, 177);
+        text-align: center;
+    }
+
+    #task{
+        width: 40rem;
+        text-align: center;
+        outline: none;
+        border: none;
+        border-radius: 7px;
+
+        padding: 1rem;
+    }
+    .list_style{
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        background-color: rgb(61, 17, 57);
+        color: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+</style>
+
+{% endblock %}
