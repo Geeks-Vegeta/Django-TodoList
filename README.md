@@ -1,5 +1,5 @@
-# Django-TodoList
-Simple TodoList using Django and Bootstrap
+# Django-TodoList 📝
+🎈 Simple TodoList using Django and Bootstrap
 ![image](https://user-images.githubusercontent.com/89457811/212549008-705321b1-b39a-4d65-b680-13b85b0e14dd.png)
 </br>
 
